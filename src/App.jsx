@@ -10,7 +10,7 @@ function App() {
   
   const passwordRef = useRef(null)
 
-  useEffect(() => {
+  const genPassword = useCallback(() => {
     let pass = "" 
     let str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
     let num = "0123456789"
@@ -38,6 +38,10 @@ function App() {
     } else {
       setStrength("weak")
     }
+  },[count, numAllowed, charAllowed])
+
+  useEffect(() => {
+    genPassword() ;
   }, [count, numAllowed, charAllowed])
 
   const copyPassword = useCallback(() => {
@@ -137,15 +141,7 @@ function App() {
         
         <button 
           className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg transition-all duration-200 font-medium"
-          onClick={() => {
-            // Generate a new password
-            let event = new Event('change');
-            // Trigger a re-render by "changing" one of the dependencies
-            setCount(prev => {
-              setTimeout(() => setCount(prev), 0);
-              return prev === 20 ? 19 : prev + 1;
-            });
-          }}
+          onClick={genPassword}
         >
           Generate New Password
         </button>
