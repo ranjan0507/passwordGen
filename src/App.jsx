@@ -12,7 +12,6 @@ function App() {
 
   const genPassword = useCallback(() => {
     let pass = "" 
-    let str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
     let num = "0123456789"
     let char = "!@#$%^&*()_+-=[]{}|;:,.<>?"
 
